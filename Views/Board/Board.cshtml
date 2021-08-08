@@ -11,7 +11,10 @@
     @{
         for (int j = 0; j < ViewBag.Board.Size; j++)
         {
-            <td>+</td>
+            if (ViewBag.Board.theGrid[i,j].IsLegalMove) { <td>+</td>}
+              else if(ViewBag.Board.theGrid[i,j].IsOccupaied) { <td>X</td>}
+                    else { <td>.</td>}
+            
         }
         }
     </tr>

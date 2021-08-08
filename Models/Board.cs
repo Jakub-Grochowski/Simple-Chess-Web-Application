@@ -40,6 +40,7 @@ namespace Simple_Chess_Web_Application.Models
         {
             ClearBoard();
 
+            theGrid[currentCell.RowNumber, currentCell.ColumnNumber].IsOccupaied = true;
             switch (chessPiece)
             {
                 case "Knight":
