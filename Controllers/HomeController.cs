@@ -10,7 +10,8 @@ namespace Simple_Chess_Web_Application.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            
+            return RedirectToAction("Board", "Board");
         }
 
         public ActionResult About()
