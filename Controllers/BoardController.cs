@@ -27,14 +27,25 @@ namespace Simple_Chess_Web_Application.Controllers
         }
         public ActionResult Move(int width, int heigh)
         {
+            String hrefJPG;
             if (emptyBoard)
             {
+                if (width + heigh % 2 == 0)
+                {
+                    hrefJPG = "/Photos/" + picked_chessPiece+"Light"+".png";
+                }
+                else { hrefJPG = "/Photos/" + picked_chessPiece + "Dark" + ".png"; }
                 myBoard.MarkNextLegalMoves(myBoard.theGrid[width, heigh], picked_chessPiece);
                 emptyBoard = false;
             }
             else {             if(myBoard.theGrid[width,heigh].IsLegalMove )
             {
-                myBoard.MarkNextLegalMoves(myBoard.theGrid[width, heigh], picked_chessPiece);
+                    if (width + heigh % 2 == 0)
+                    {
+                        hrefJPG = "/Photos/" + picked_chessPiece + "Light" + ".png";
+                    }
+                    else { hrefJPG = "/Photos/" + picked_chessPiece + "Dark" + ".png"; }
+                    myBoard.MarkNextLegalMoves(myBoard.theGrid[width, heigh], picked_chessPiece);
             }
             else
             {
@@ -44,6 +55,7 @@ namespace Simple_Chess_Web_Application.Controllers
             }
 
             // myBoard.MarkNextLegalMoves(myBoard.theGrid[4, 4], "Knight");
+            ViewBag.href = hrefJPG;
             ViewBag.Board = myBoard;
             return View("Board");
         }

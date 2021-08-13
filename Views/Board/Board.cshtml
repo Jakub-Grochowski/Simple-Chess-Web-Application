@@ -6,7 +6,7 @@
 <h2>Board</h2>
 @*@ViewBag.Board.Size*@
 
-
+@*<img src="~/Photos/BishopDark.jpg" width="50" height="60" alt="ups" runat="server" />*@
 <table>
     @{ for (int i = 0; i < ViewBag.Board.Size; i++)
         {
@@ -19,7 +19,7 @@
                         }
                         else if (ViewBag.Board.theGrid[i, j].IsOccupaied)
                         {
-                            <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="Occupaied">X</td>
+                            <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="Occupaied"><img src="@ViewBag.href" alt="cos nie tak"/></td>
                         }
                         else
                         {
