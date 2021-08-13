@@ -4,10 +4,10 @@
 }
 @Styles.Render("~/Content/MyCSS.css")
 <h2>Board</h2>
-@ViewBag.Board.Size
+@*@ViewBag.Board.Size*@
 
 
-<table  id="t">
+<table  >
     @{ for (int i = 0; i < ViewBag.Board.Size; i++)
         {
             <tr>
@@ -29,8 +29,14 @@
     }
 </table>
 
-<script>
-    function tableclick() {
-        document.getElementById("t").style.backgroundColor = "red";
-    }
-</script>
+<form method="post" action="@Url.Action("PickChess", "Board")">
+    <input type="radio" id="Knight" name="chessPiece" value="Knight" />
+    <label for="Knight">Knight</label><br />
+    <input type="radio" id="King" name="chessPiece" value="King" />
+    <label for="King">King</label><br />
+    <input type="submit" value="Wybierz" />
+</form>
+@*<ul>
+    <li onclick="location.href='@Url.Action("PickChess", "Board",new { chessPiece="Knight" })'">Knight</li>
+    <li onclick="location.href='@Url.Action("PickChess", "Board",new { chessPiece="King" })'">King</li>
+</ul>*@
