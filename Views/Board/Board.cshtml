@@ -5,22 +5,30 @@
 @Styles.Render("~/Content/MyCSS.css")
 <h2>Board</h2>
 @ViewBag.Board.Size
-<table onclick="location.href='@Url.Action("test", "Board")'" id="t">
-    @{ for (int i = 0; i < ViewBag.Board.Size; i++)
-        {<tr>
-    @{
-        for (int j = 0; j < ViewBag.Board.Size; j++)
-        {
-            if (ViewBag.Board.theGrid[i, j].IsLegalMove) { <td id="@((i * 8) + j) ">+</td>}
-    else if (ViewBag.Board.theGrid[i, j].IsOccupaied) { <td id="@((i * 8) + j) ">X</td>}
-    else { <td id="@((i * 8) + j) ">.</td>}
 
-        }
-        }
-    </tr>
+
+<table  id="t">
+    @{ for (int i = 0; i < ViewBag.Board.Size; i++)
+        {
+            <tr>
+                @{for (int j = 0; j < ViewBag.Board.Size; j++)
+                    {
+                        <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board",new { width = i, heigh = j })'">
+                            @{ if (ViewBag.Board.theGrid[i, j].IsLegalMove)
+                                { <p>+</p> }
+                                else if (ViewBag.Board.theGrid[i, j].IsOccupaied)
+                                { <p>X</p> }
+                                else
+                                { <p>-</p> }
+                            }
+                        </td>
+                    }
+                }
+            </tr>
         }
     }
-    </table>
+</table>
+
 <script>
     function tableclick() {
         document.getElementById("t").style.backgroundColor = "red";
