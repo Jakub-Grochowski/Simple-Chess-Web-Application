@@ -22,5 +22,12 @@ namespace Simple_Chess_Web_Application.Controllers
 
             return View();
         }
+        public ActionResult test()
+        {
+            Board myBoard = new Board();
+            myBoard.MarkNextLegalMoves(myBoard.theGrid[4, 4], "Knight");
+            ViewBag.Board = myBoard;
+            return View("Board");
+        }
     }
 }

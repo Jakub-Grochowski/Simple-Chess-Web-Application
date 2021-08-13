@@ -5,19 +5,24 @@
 @Styles.Render("~/Content/MyCSS.css")
 <h2>Board</h2>
 @ViewBag.Board.Size
-<table>
+<table onclick="location.href='@Url.Action("test", "Board")'" id="t">
     @{ for (int i = 0; i < ViewBag.Board.Size; i++)
         {<tr>
     @{
         for (int j = 0; j < ViewBag.Board.Size; j++)
         {
-            if (ViewBag.Board.theGrid[i,j].IsLegalMove) { <td>+</td>}
-              else if(ViewBag.Board.theGrid[i,j].IsOccupaied) { <td>X</td>}
-                    else { <td>.</td>}
-            
+            if (ViewBag.Board.theGrid[i, j].IsLegalMove) { <td id="@((i * 8) + j) ">+</td>}
+    else if (ViewBag.Board.theGrid[i, j].IsOccupaied) { <td id="@((i * 8) + j) ">X</td>}
+    else { <td id="@((i * 8) + j) ">.</td>}
+
         }
         }
     </tr>
         }
     }
     </table>
+<script>
+    function tableclick() {
+        document.getElementById("t").style.backgroundColor = "red";
+    }
+</script>
