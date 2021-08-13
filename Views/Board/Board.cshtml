@@ -2,26 +2,31 @@
 @{
     ViewBag.Title = "Board";
 }
-@Styles.Render("~/Content/MyCSS.css")
+@Styles.Render("~/Content/MyCSS2.css")
 <h2>Board</h2>
 @*@ViewBag.Board.Size*@
 
 
-<table  >
+<table>
     @{ for (int i = 0; i < ViewBag.Board.Size; i++)
         {
             <tr>
                 @{for (int j = 0; j < ViewBag.Board.Size; j++)
                     {
-                        <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board",new { width = i, heigh = j })'">
-                            @{ if (ViewBag.Board.theGrid[i, j].IsLegalMove)
-                                { <p>+</p> }
-                                else if (ViewBag.Board.theGrid[i, j].IsOccupaied)
-                                { <p>X</p> }
-                                else
-                                { <p>-</p> }
-                            }
-                        </td>
+                        if (ViewBag.Board.theGrid[i, j].IsLegalMove)
+                        {
+                            <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="legalMove"></td>
+                        }
+                        else if (ViewBag.Board.theGrid[i, j].IsOccupaied)
+                        {
+                            <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="Occupaied">X</td>
+                        }
+                        else
+                        {
+                        if ((i + j) % 2 == 0) {<td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="FreeLight"></td>                   }
+                        else { <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="FreeDark">
+</td>}  
+                        }
                     }
                 }
             </tr>
@@ -34,6 +39,12 @@
     <label for="Knight">Knight</label><br />
     <input type="radio" id="King" name="chessPiece" value="King" />
     <label for="King">King</label><br />
+    <input type="radio" id="Rook" name="chessPiece" value="Rook" />
+    <label for="Rook">Rook</label><br />
+    <input type="radio" id="Bishop" name="chessPiece" value="Bishop" />
+    <label for="Bishop">Bishop</label><br />
+    <input type="radio" id="Queen" name="chessPiece" value="Queen" />
+    <label for="Queen">Queen</label><br />
     <input type="submit" value="Wybierz" />
 </form>
 @*<ul>

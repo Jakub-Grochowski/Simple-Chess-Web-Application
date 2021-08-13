@@ -80,12 +80,120 @@ namespace Simple_Chess_Web_Application.Models
                         theGrid[currentCell.RowNumber -1, currentCell.ColumnNumber ].IsLegalMove = true;
                     break;
                 case "Rook":
+                    for (int i = currentCell.RowNumber+1; i< Size; i++)
+                    {
+                        theGrid[i, currentCell.ColumnNumber].IsLegalMove = true;
+                    }
+                    for (int i = currentCell.RowNumber -1; i >= 0; i--)
+                    {
+                        theGrid[i, currentCell.ColumnNumber].IsLegalMove = true;
+                    }
+                    
+                    for (int i = currentCell.ColumnNumber + 1; i < Size; i++)
+                    {
+                        theGrid[currentCell.RowNumber, i].IsLegalMove = true;
+                    }
+                    for (int i = currentCell.ColumnNumber -1; i >=0; i--)
+                    {
+                        theGrid[currentCell.RowNumber, i].IsLegalMove = true;
+                    }
                     break;
                 case "Pawn":
                     break;
                 case "Bishop":
+                    int temp = 0;
+                    for (int i = currentCell.RowNumber + 1; i < Size; i++)
+                    {
+                        temp++;
+                        if(isSafe(i, currentCell.ColumnNumber+temp))
+                        theGrid[i, currentCell.ColumnNumber+temp].IsLegalMove = true;
+                    }
+                    temp = 0;
+                    for (int i = currentCell.RowNumber + 1; i < Size; i++)
+                    {
+                        temp++;
+                        if (isSafe(i, currentCell.ColumnNumber - temp))
+                            theGrid[i, currentCell.ColumnNumber-temp].IsLegalMove = true;
+                    }
+                    temp = 0;
+                    for (int i = currentCell.ColumnNumber - 1; i >= 0; i--)
+                    {
+                        temp++;
+                        if (isSafe(currentCell.RowNumber -temp, i))
+                            theGrid[currentCell.RowNumber - temp, i].IsLegalMove = true;
+                    }
+                    temp = 0;
+                    for (int i = currentCell.ColumnNumber + 1; i < Size; i++)
+                    {
+                        temp++;
+                        if (isSafe(currentCell.RowNumber - temp, i))
+                            theGrid[currentCell.RowNumber - temp, i].IsLegalMove = true;
+                    }
                     break;
                 case "Queen":
+                    //Here i just past King Rook and Bishop code so i didnt have to think about it.
+                    if (isSafe(currentCell.RowNumber, currentCell.ColumnNumber + 1))
+                        theGrid[currentCell.RowNumber, currentCell.ColumnNumber + 1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber, currentCell.ColumnNumber - 1))
+                        theGrid[currentCell.RowNumber, currentCell.ColumnNumber - 1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber + 1, currentCell.ColumnNumber + 1))
+                        theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber + 1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber + 1, currentCell.ColumnNumber - 1))
+                        theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber - 1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber + 1, currentCell.ColumnNumber))
+                        theGrid[currentCell.RowNumber + 1, currentCell.ColumnNumber].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber - 1, currentCell.ColumnNumber + 1))
+                        theGrid[currentCell.RowNumber - 1, currentCell.ColumnNumber + 1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber - 1, currentCell.ColumnNumber - 1))
+                        theGrid[currentCell.RowNumber - 1, currentCell.ColumnNumber - 1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber - 1, currentCell.ColumnNumber))
+                        theGrid[currentCell.RowNumber - 1, currentCell.ColumnNumber].IsLegalMove = true;
+                    for (int i = currentCell.RowNumber + 1; i < Size; i++)
+                    {
+                        theGrid[i, currentCell.ColumnNumber].IsLegalMove = true;
+                    }
+                    for (int i = currentCell.RowNumber - 1; i >= 0; i--)
+                    {
+                        theGrid[i, currentCell.ColumnNumber].IsLegalMove = true;
+                    }
+
+                    for (int i = currentCell.ColumnNumber + 1; i < Size; i++)
+                    {
+                        theGrid[currentCell.RowNumber, i].IsLegalMove = true;
+                    }
+                    for (int i = currentCell.ColumnNumber - 1; i >= 0; i--)
+                    {
+                        theGrid[currentCell.RowNumber, i].IsLegalMove = true;
+                    }
+                    // and i change temp name to temp2
+                    int temp2 = 0;
+                    for (int i = currentCell.RowNumber + 1; i < Size; i++)
+                    {
+                        temp2++;
+                        if (isSafe(i, currentCell.ColumnNumber + temp2))
+                            theGrid[i, currentCell.ColumnNumber + temp2].IsLegalMove = true;
+                    }
+                    temp2 = 0;
+                    for (int i = currentCell.RowNumber + 1; i < Size; i++)
+                    {
+                        temp2++;
+                        if (isSafe(i, currentCell.ColumnNumber - temp2))
+                            theGrid[i, currentCell.ColumnNumber - temp2].IsLegalMove = true;
+                    }
+                    temp2 = 0;
+                    for (int i = currentCell.ColumnNumber - 1; i >= 0; i--)
+                    {
+                        temp2++;
+                        if (isSafe(currentCell.RowNumber - temp2, i))
+                            theGrid[currentCell.RowNumber - temp2, i].IsLegalMove = true;
+                    }
+                    temp2 = 0;
+                    for (int i = currentCell.ColumnNumber + 1; i < Size; i++)
+                    {
+                        temp2++;
+                        if (isSafe(currentCell.RowNumber - temp2, i))
+                            theGrid[currentCell.RowNumber - temp2, i].IsLegalMove = true;
+                    }
                     break;
 
             }
