@@ -44,14 +44,22 @@ namespace Simple_Chess_Web_Application.Models
             switch (chessPiece)
             {
                 case "Knight":
-                    theGrid[currentCell.RowNumber+2, currentCell.ColumnNumber+1].IsLegalMove = true;
-                    theGrid[currentCell.RowNumber+2, currentCell.ColumnNumber-1].IsLegalMove = true;
-                    theGrid[currentCell.RowNumber-2, currentCell.ColumnNumber+1].IsLegalMove = true;
-                    theGrid[currentCell.RowNumber-2, currentCell.ColumnNumber-1].IsLegalMove = true;
-                    theGrid[currentCell.RowNumber+1, currentCell.ColumnNumber+2].IsLegalMove = true;
-                    theGrid[currentCell.RowNumber+1, currentCell.ColumnNumber-2].IsLegalMove = true;
-                    theGrid[currentCell.RowNumber-1, currentCell.ColumnNumber+2].IsLegalMove = true;
-                    theGrid[currentCell.RowNumber-1, currentCell.ColumnNumber-2].IsLegalMove = true;
+                    if(isSafe(currentCell.RowNumber + 2, currentCell.ColumnNumber + 1))
+                        theGrid[currentCell.RowNumber+2, currentCell.ColumnNumber+1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber + 2, currentCell.ColumnNumber - 1))
+                        theGrid[currentCell.RowNumber+2, currentCell.ColumnNumber-1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber - 2, currentCell.ColumnNumber + 1))
+                        theGrid[currentCell.RowNumber-2, currentCell.ColumnNumber+1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber - 2, currentCell.ColumnNumber - 1))
+                        theGrid[currentCell.RowNumber-2, currentCell.ColumnNumber-1].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber + 1, currentCell.ColumnNumber + 2))
+                        theGrid[currentCell.RowNumber+1, currentCell.ColumnNumber+2].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber + 1, currentCell.ColumnNumber - 2))
+                        theGrid[currentCell.RowNumber+1, currentCell.ColumnNumber-2].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber - 1, currentCell.ColumnNumber + 2))
+                        theGrid[currentCell.RowNumber-1, currentCell.ColumnNumber+2].IsLegalMove = true;
+                    if (isSafe(currentCell.RowNumber - 1, currentCell.ColumnNumber - 2))
+                        theGrid[currentCell.RowNumber-1, currentCell.ColumnNumber-2].IsLegalMove = true;
                     break;
                 case "King":
                     break;
@@ -66,6 +74,13 @@ namespace Simple_Chess_Web_Application.Models
 
             }
         }
+
+        private bool isSafe(int row, int col)
+        {
+            if (row < Size && row>0 && col < Size && col>0) return true;
+            else return false;
+        }
+
         public void ClearBoard()
         {
             for (int i = 0; i < Size; i++)
