@@ -22,6 +22,7 @@ namespace Simple_Chess_Web_Application.Controllers
             emptyBoard = true;
             myBoard = new Board();           
             ViewBag.Board = myBoard;
+            ViewBag.empty = emptyBoard;
 
             return View();
         }
@@ -34,7 +35,7 @@ namespace Simple_Chess_Web_Application.Controllers
                 {
                     hrefJPG = "/Photos/" + picked_chessPiece+"Light"+".png";
                 }
-                else { hrefJPG = "/Photos/" + picked_chessPiece + "Dark" + ".png"; }
+                else { hrefJPG = "/Content/Photos/" + picked_chessPiece + "Dark" + ".png"; }
                 myBoard.MarkNextLegalMoves(myBoard.theGrid[width, heigh], picked_chessPiece);
                 emptyBoard = false;
             }
@@ -57,6 +58,7 @@ namespace Simple_Chess_Web_Application.Controllers
             // myBoard.MarkNextLegalMoves(myBoard.theGrid[4, 4], "Knight");
             ViewBag.href = hrefJPG;
             ViewBag.Board = myBoard;
+            ViewBag.empty = emptyBoard;
             return View("Board");
         }
 
@@ -66,6 +68,7 @@ namespace Simple_Chess_Web_Application.Controllers
             picked_chessPiece = chessPiece;
             ViewBag.Board = myBoard;
             emptyBoard = true;
+            ViewBag.empty = emptyBoard;
             return View("Board");
         }
     }

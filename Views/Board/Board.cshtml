@@ -19,13 +19,35 @@
                         }
                         else if (ViewBag.Board.theGrid[i, j].IsOccupaied)
                         {
-                            <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="Occupaied"><img src="@ViewBag.href" alt="cos nie tak"/></td>
+                            <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="Occupaied"><img src="@ViewBag.href" alt="cos nie tak" /></td>
                         }
                         else
                         {
-                        if ((i + j) % 2 == 0) {<td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="FreeLight"></td>                   }
-                        else { <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="FreeDark">
-</td>}  
+                            if (ViewBag.empty)
+                            {
+                                if ((i + j) % 2 == 0)
+                                {
+                                    <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="FreeLight"></td>
+                                }
+                                else
+                                {
+                                    <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="FreeDark"></td>
+                                }
+
+
+                            }
+
+                            else
+                            {
+                                if ((i + j) % 2 == 0)
+                                {
+                                    <td id="@((i * 8) + j)" onclick="wrongMove()" class="FreeLight"></td>
+                                }
+                                else
+                                {
+                                    <td id="@((i * 8) + j)" onclick="wrongMove()" class="FreeDark"></td>
+                                }
+                            }
                         }
                     }
                 }
@@ -47,6 +69,12 @@
     <label for="Queen">Queen</label><br />
     <input type="submit" value="Wybierz" />
 </form>
+
+<script>
+    function wrongMove() {
+        alert("Illegal Move!");
+    }
+</script>
 @*<ul>
     <li onclick="location.href='@Url.Action("PickChess", "Board",new { chessPiece="Knight" })'">Knight</li>
     <li onclick="location.href='@Url.Action("PickChess", "Board",new { chessPiece="King" })'">King</li>
