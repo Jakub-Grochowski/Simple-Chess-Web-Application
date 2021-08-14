@@ -23,6 +23,7 @@ namespace Simple_Chess_Web_Application.Controllers
             myBoard = new Board();           
             ViewBag.Board = myBoard;
             ViewBag.empty = emptyBoard;
+            ViewBag.PickedChess = false;
 
             return View();
         }
@@ -31,9 +32,9 @@ namespace Simple_Chess_Web_Application.Controllers
             String hrefJPG;
             if (emptyBoard)
             {
-                if (width + heigh % 2 == 0)
+                if ((width + heigh) % 2 == 0)
                 {
-                    hrefJPG = "/Photos/" + picked_chessPiece+"Light"+".png";
+                    hrefJPG = "/Content/Photos/" + picked_chessPiece+"Light"+".png";
                 }
                 else { hrefJPG = "/Content/Photos/" + picked_chessPiece + "Dark" + ".png"; }
                 myBoard.MarkNextLegalMoves(myBoard.theGrid[width, heigh], picked_chessPiece);
@@ -41,11 +42,11 @@ namespace Simple_Chess_Web_Application.Controllers
             }
             else {             if(myBoard.theGrid[width,heigh].IsLegalMove )
             {
-                    if (width + heigh % 2 == 0)
+                    if ((width + heigh) % 2 == 0)
                     {
-                        hrefJPG = "/Photos/" + picked_chessPiece + "Light" + ".png";
+                        hrefJPG = "/Content/Photos/" + picked_chessPiece + "Light" + ".png";
                     }
-                    else { hrefJPG = "/Photos/" + picked_chessPiece + "Dark" + ".png"; }
+                    else { hrefJPG = "/Content/Photos/" + picked_chessPiece + "Dark" + ".png"; }
                     myBoard.MarkNextLegalMoves(myBoard.theGrid[width, heigh], picked_chessPiece);
             }
             else
@@ -69,6 +70,7 @@ namespace Simple_Chess_Web_Application.Controllers
             ViewBag.Board = myBoard;
             emptyBoard = true;
             ViewBag.empty = emptyBoard;
+            ViewBag.PickedChess = true;
             return View("Board");
         }
     }

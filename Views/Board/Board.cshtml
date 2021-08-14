@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Board";
 }
-@Styles.Render("~/Content/MyCSS2.css")
+@Styles.Render("~/Content/MyCSS.css")
 <h2>Board</h2>
 @*@ViewBag.Board.Size*@
 
@@ -10,20 +10,22 @@
 <table>
     @{ for (int i = 0; i < ViewBag.Board.Size; i++)
         {
-            <tr>
-                @{for (int j = 0; j < ViewBag.Board.Size; j++)
+        <tr>
+            @{for (int j = 0; j < ViewBag.Board.Size; j++)
+                {
+                    if (ViewBag.Board.theGrid[i, j].IsLegalMove)
                     {
-                        if (ViewBag.Board.theGrid[i, j].IsLegalMove)
+                        <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="legalMove"></td>
+                    }
+                    else if (ViewBag.Board.theGrid[i, j].IsOccupaied)
+                    {
+                        <td id="@((i * 8) + j)"  class="Occupaied"><img src="@ViewBag.href" width="50"; height:"50"; alt="cos nie tak" /></td>
+                    }
+                    else
+                    {
+                        if (ViewBag.empty)
                         {
-                            <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="legalMove"></td>
-                        }
-                        else if (ViewBag.Board.theGrid[i, j].IsOccupaied)
-                        {
-                            <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="Occupaied"><img src="@ViewBag.href" alt="cos nie tak" /></td>
-                        }
-                        else
-                        {
-                            if (ViewBag.empty)
+                            if (ViewBag.PickedChess)
                             {
                                 if ((i + j) % 2 == 0)
                                 {
@@ -33,25 +35,36 @@
                                 {
                                     <td id="@((i * 8) + j)" onclick="location.href='@Url.Action("Move", "Board", new { width = i, heigh = j })'" class="FreeDark"></td>
                                 }
-
-
                             }
-
                             else
                             {
                                 if ((i + j) % 2 == 0)
                                 {
-                                    <td id="@((i * 8) + j)" onclick="wrongMove()" class="FreeLight"></td>
+                                    <td id="@((i * 8) + j)" onclick="ChoseChess()" class="FreeLight"></td>
                                 }
                                 else
                                 {
-                                    <td id="@((i * 8) + j)" onclick="wrongMove()" class="FreeDark"></td>
+                                    <td id="@((i * 8) + j)" onclick="ChoseChess()" class="FreeDark"></td>
                                 }
+                            }
+
+                        }
+
+                        else
+                        {
+                            if ((i + j) % 2 == 0)
+                            {
+                                <td id="@((i * 8) + j)" onclick="wrongMove()" class="FreeLight"></td>
+                            }
+                            else
+                            {
+                                <td id="@((i * 8) + j)" onclick="wrongMove()" class="FreeDark"></td>
                             }
                         }
                     }
                 }
-            </tr>
+            }
+        </tr>
         }
     }
 </table>
@@ -73,6 +86,10 @@
 <script>
     function wrongMove() {
         alert("Illegal Move!");
+    }
+
+    function ChoseChess() {
+        alert("Chose Chess Piece First Please");
     }
 </script>
 @*<ul>
