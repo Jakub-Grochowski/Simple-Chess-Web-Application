@@ -3,7 +3,13 @@
     ViewBag.Title = "Board";
 }
 @Styles.Render("~/Content/MyCSS.css")
-<h2>Board</h2>
+@if (ViewBag.PickedChess)
+{
+    <h2>@ViewBag.chessPiece</h2>
+}else
+            {
+                <h2>Nie wybrano bierki</h2>
+            }
 @*@ViewBag.Board.Size*@
 
 @*<img src="~/Photos/BishopDark.jpg" width="50" height="60" alt="ups" runat="server" />*@

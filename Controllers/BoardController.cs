@@ -60,6 +60,8 @@ namespace Simple_Chess_Web_Application.Controllers
             ViewBag.href = hrefJPG;
             ViewBag.Board = myBoard;
             ViewBag.empty = emptyBoard;
+            ViewBag.PickedChess = true;
+            ViewBag.chessPiece = picked_chessPiece;
             return View("Board");
         }
 
@@ -71,6 +73,7 @@ namespace Simple_Chess_Web_Application.Controllers
             emptyBoard = true;
             ViewBag.empty = emptyBoard;
             ViewBag.PickedChess = true;
+            ViewBag.chessPiece = picked_chessPiece;
             return View("Board");
         }
     }
